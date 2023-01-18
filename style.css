@@ -11,9 +11,37 @@ body {
 h1 {
     font-size: 4rem;
     font-weight: 700;
+    display: flex;
+    justify-content: center;
 }
 
 h2 {
     font-size: 1.5rem;
     font-weight: 500;
+    display: flex;
+    justify-content: center;
+}
+
+#available-pokemons {
+
+}
+
+#chosen-pokemons {}
+
+article {
+    background-color: #FCFCFC;
+    max-width: 20rem;
+    display: flex;
+    border-radius: 2px;
+    margin: 4rem;
+}
+img {
+    max-width: 30%;
+    background-color: rgb(248, 77, 222);
+    border-radius: 2px;
+    margin: 1rem;
+}
+
+article section {
+   
 }
