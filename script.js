@@ -42,42 +42,59 @@ const pokemons = [{
 },
 ]
 
-let chosenPokemons = [];
+let chosenPokemonsArr = [];
 
 let el = document.createElement('section');
 let availablePokemons = document.querySelector('#available-pokemons');
-let i;
-for (i = 0; i < pokemons.length; i++) {
-    console.log(pokemons[i].name, pokemons[i].cp);
-    
-    availablePokemons.insertAdjacentHTML('afterend', 
-    `<a id="${pokemons[i].id}">
-        <article>
-            <img src="${pokemons[i].src}" alt="${pokemons[i].name}">
-            <section>
-                <h2>${pokemons[i].name}</h2>
-                <p>${pokemons[i].cp} CP</p>
-            </section>
-        </article>
-    </a>`);
+let chosenPokemons = document.querySelector('#chosen-pokemons');
+
+showAvailablePokes();
+
+onClick();
+
+function showAvailablePokes() {
+    for (let i = 0; i < pokemons.length; i++) {    
+        availablePokemons.insertAdjacentHTML('afterend', 
+        `
+            <article id="${pokemons[i].id}">
+                <img src="${pokemons[i].src}" alt="${pokemons[i].name}">
+                <section>
+                    <h2>${pokemons[i].name}</h2>
+                    <p>${pokemons[i].cp} CP</p>
+                </section>
+            </article>
+        `);
+    }
+}
+
+function onClick() {
     document.querySelectorAll('article').forEach(e => {
-        e.addEventListener('click', () => {
-            chosenPokemons.push(pokemons[i].name);
-            console.log(chosenPokemons, 'chosen');
-        })
-        // pokemon = chosenPokemons;
-        // // chosenPokemons.push(pokemons[i]);
+        e.addEventListener('click', () => {    
+            let pokemonId = parseInt(e.id);
+    
+            for (let i = 0; i < pokemons.length; i++) {
+                
+                if (pokemonId === pokemons[i].id && chosenPokemonsArr.id != pokemons[i].id) {
+                    chosenPokemonsArr.unshift(pokemons[i]);
+                    pokemons.splice(i, 1);
+    
+                    console.log(pokemons, 'gone');
+                    chosenPokemons.insertAdjacentHTML('afterend', 
+                    `
+                    <article id="${chosenPokemonsArr[0].id}">
+                        <img src="${chosenPokemonsArr[0].src}" alt="">
+                        <section>
+                            <h2>${chosenPokemonsArr[0].name}</h2>
+                            <p>${chosenPokemonsArr[0].cp} CP</p>
+                        </section>
+                    </article> 
+                    `)
+                }
+            }  
+        });  
     });
 }
 
 
-// document.querySelectorAll('a').forEach(link => {
-//     link.addEventListener('click', addPokemon);
-// });
 
-// function addPokemon(hej) {
-    
-//     chosenPokemons.push(hej);
 
-//     console.log(chosenPokemons, 'new poke');
-// }
