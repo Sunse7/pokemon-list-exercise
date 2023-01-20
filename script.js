@@ -52,8 +52,10 @@ showAvailablePokes();
 onClick();
 
 function showAvailablePokes() {
+
+    availablePokemons.innerHTML = '';
     for (let i = 0; i < pokemons.length; i++) {    
-        availablePokemons.insertAdjacentHTML('afterend', 
+        availablePokemons.insertAdjacentHTML('beforeend', 
         `
             <article id="${pokemons[i].id}">
                 <img src="${pokemons[i].src}" alt="${pokemons[i].name}">
@@ -63,6 +65,31 @@ function showAvailablePokes() {
                 </section>
             </article>
         `);
+        document.getElementById(`${pokemons[i].id}`).addEventListener('click', (e) => {    
+            let pokemonId = parseInt(e.id);
+            
+            console.log(e);
+
+            for (let i = 0; i < pokemons.length; i++) {
+                
+                if (pokemonId === pokemons[i].id && chosenPokemonsArr.id != pokemons[i].id) {
+                    chosenPokemonsArr.unshift(pokemons[i]);
+                    pokemons.splice(i, 1);
+                    showAvailablePokes();
+                    console.log(pokemons, 'gone');
+                    chosenPokemons.insertAdjacentHTML('afterend', 
+                    `
+                    <article id="${chosenPokemonsArr[0].id}">
+                        <img src="${chosenPokemonsArr[0].src}" alt="">
+                        <section>
+                            <h2>${chosenPokemonsArr[0].name}</h2>
+                            <p>${chosenPokemonsArr[0].cp} CP</p>
+                        </section>
+                    </article> 
+                    `)
+                }
+            }  
+        });
     }
 }
 
@@ -76,7 +103,7 @@ function onClick() {
                 if (pokemonId === pokemons[i].id && chosenPokemonsArr.id != pokemons[i].id) {
                     chosenPokemonsArr.unshift(pokemons[i]);
                     pokemons.splice(i, 1);
-    
+                    showAvailablePokes();
                     console.log(pokemons, 'gone');
                     chosenPokemons.insertAdjacentHTML('afterend', 
                     `
