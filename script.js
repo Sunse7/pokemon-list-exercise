@@ -44,7 +44,6 @@ const pokemons = [{
 
 let chosenPokemonsArr = [];
 
-let el = document.createElement('section');
 let availablePokemons = document.querySelector('#available-pokemons');
 let chosenPokemons = document.querySelector('#chosen-pokemons');
 
